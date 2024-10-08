@@ -1,0 +1,3 @@
+[submodule "rails7-samson-sample-client"]
+	path = rails7-samson-sample-client
+	url = git@github.com:publichtml/rails7-samson-sample-client.git
