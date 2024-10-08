@@ -4,6 +4,7 @@ services:
     image: zendesk/samson:latest # replace with `build: .` to use Dockerfile (--build to rebuild it)
     ports:
       - "3000:9080"
+    platform: linux/x86_64
     volumes:
       - .:/app/
     environment:
