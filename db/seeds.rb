@@ -1,38 +1,31 @@
 # frozen_string_literal: true
-prod_env = Environment.create!(name: 'Production', production: true)
-Environment.create!(name: 'Staging')
-Environment.create!(name: 'Master')
 
-group1 = DeployGroup.create!(
-  name: 'Group1',
-  environment: prod_env
-)
+if Environment.all.empty?
+  Environment.create!(name: 'Master')
 
-project = Project.create!(
-  name: "Example-project",
-  repository_url: "https://github.com/samson-test-org/example-project.git"
-)
+  project = Project.create!(
+    name: "rails7-samson-sample-client",
+    repository_url: "https://github.com/publichtml/rails7-samson-sample-client.git"
+  )
 
-project.stages.create!(
-  name: "Production",
-  deploy_groups: [group1]
-)
+  stage = project.stages.create!(
+    name: "Production"
+  )
 
-User.create!(
-  name: "Periodical",
-  email: "periodical@example.com",
-  external_id: Samson::PeriodicalDeploy::EXTERNAL_ID
-)
+  command = Command.create!(
+    command: <<~EOS
+      export TARGET_HOST=app
+      export TARGET_HOST_PORT=22
 
-user = User.create!(
-  name: "Mr. Seed",
-  email: "seed@example.com",
-  external_id: "123"
-)
+      bundle install
+      bundle exec cap production deploy
+    EOS
+  )
 
-project.releases.create!(
-  commit: "1234" * 10,
-  author: user
-)
+  StageCommand.create!(
+    stage_id: stage.id,
+    command_id: command.id,
+    position: 0
+  )
+end
 
-Samson::Hooks.plugins.each { |p| p.engine.load_seed }

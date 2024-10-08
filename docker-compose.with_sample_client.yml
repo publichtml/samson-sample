@@ -1,0 +1,21 @@
+version: "2"
+services:
+  samson:
+    image: zendesk/samson:latest # replace with `build: .` to use Dockerfile (--build to rebuild it)
+    ports:
+      - "3000:9080"
+    platform: linux/x86_64
+    volumes:
+      - .:/app/
+    environment:
+      DATABASE_URL: "sqlite3:///app/db/development.sqlite3"
+      RAILS_LOG_TO_STDOUT: 1
+    command: ["./script/docker_dev_server"]
+
+  app:
+    build: rails7-samson-sample-client/
+    ports:
+      - "4000:3000"
+      - "4022:22"
+    privileged: true
+    tty: true
