@@ -1,3 +1,27 @@
+# samson-sample
+
+[Samson](https://github.com/zendesk/samson) を理解するために、サンプルのクライアントと接続してデプロイを試せるようにしたもの。
+
+サンプルクライアントは [rails7-samson-sample-client](https://github.com/publichtml/rails7-samson-sample-client) にあり、Welcome と表示するだけの Rails アプリ。
+
+## Usage
+
+```
+$ git clone --recursive git@github.com:publichtml/samson-sample.git
+
+$ cd samson-sample
+
+$ docker-compose -f docker-compose.with_sample_client.yml build
+$ docker-compose -f docker-compose.with_sample_client.yml up -d
+```
+
+- http://localhost:3000 にアクセスすると Samson が使える
+- `Produciton` state でデプロイ実行
+- http://localhost:4000 でデプロイされたサンプルアプリが動いている
+  - `Welcome` とだけ表示される
+
+# Original README
+
 <img src="https://github.com/zendesk/samson/raw/master/app/assets/images/logo_light.png" width=400/>
 
 ![Build status](https://github.com/zendesk/samson/workflows/repo-checks/badge.svg)
