@@ -20,6 +20,16 @@ $ docker-compose -f docker-compose.with_sample_client.yml up -d
 - http://localhost:4000 でデプロイされたサンプルアプリが動いている
   - `Welcome` とだけ表示される
 
+## Tips
+
+コンテナに入って rails console を起動する際は `ENV["USER"]` をセットしておく必要がある。
+
+```
+$ export USER=root
+$ bin/rails c
+```
+
+
 # Original README
 
 <img src="https://github.com/zendesk/samson/raw/master/app/assets/images/logo_light.png" width=400/>
