@@ -16,7 +16,7 @@ $ docker-compose -f docker-compose.with_sample_client.yml up -d
 ```
 
 - http://localhost:3000 にアクセスすると Samson が使える
-- `Produciton` state でデプロイ実行
+- `Produciton` stage でデプロイ実行
 - http://localhost:4000 でデプロイされたサンプルアプリが動いている
   - `Welcome` とだけ表示される
 
