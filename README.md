@@ -6,10 +6,16 @@
 
 ## Usage
 
+- docker-compose をインストールしておく
+- Docker の host マシンの公開鍵を用意しておく
+  - 実際の環境を模擬するためにコンテナ同士の直接接続ではなく host の ssh-agent を介した接続をしている
+
 ```
 $ git clone --recursive git@github.com:publichtml/samson-sample.git
 
 $ cd samson-sample
+
+$ cp /path/to/id_rsa.pub rails7-samson-sample-client/id_rsa.pub
 
 $ docker-compose -f docker-compose.with_sample_client.yml build
 $ docker-compose -f docker-compose.with_sample_client.yml up -d
