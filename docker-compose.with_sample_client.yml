@@ -7,9 +7,14 @@ services:
     platform: linux/x86_64
     volumes:
       - .:/app/
+      # for ssh agent (Linux)
+      # - "$SSH_AUTH_SOCK:/tmp/ssh-agent.sock"
+      # for ssh agent (Mac)
+      - "/run/host-services/ssh-auth.sock:/tmp/ssh-agent.sock"
     environment:
       DATABASE_URL: "sqlite3:///app/db/development.sqlite3"
       RAILS_LOG_TO_STDOUT: 1
+      SSH_AUTH_SOCK: "/tmp/ssh-agent.sock"
     command: ["./script/docker_dev_server"]
 
   app:

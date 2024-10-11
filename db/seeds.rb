@@ -14,8 +14,9 @@ if Environment.all.empty?
 
   command = Command.create!(
     command: <<~EOS
-      export TARGET_HOST=app
-      export TARGET_HOST_PORT=22
+      export TARGET_HOST=gateway.docker.internal
+      export TARGET_HOST_PORT=4022
+      export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
 
       bundle install
       bundle exec cap production deploy
